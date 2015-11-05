@@ -1,0 +1,7 @@
+{
+    "require": {
+        "aws/aws-sdk-php": "^3.9",
+        "doctrine/cache": "^1.5",
+        "aws/elastictranscoder": "2012-09-25"
+    }
+}
