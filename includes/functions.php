@@ -1,4 +1,5 @@
 <?php
+
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
 use Aws\ElasticTranscoder\ElasticTranscoderClient;
@@ -15,7 +16,7 @@ function s3_upload($conn, $input) {
         $result = $S3Upload->putObject(array(
             'Bucket' => $input['bucket'],
             'Key' => $input['upload_file'],
-            'SourceFile' => $input['upload_file'],
+            'SourceFile' => $input['source_file'],
         ));
 
         return $result;
@@ -44,6 +45,7 @@ function elastictranscode_transcode($conn, $transcode) {
         ),
         'Outputs' => array(
             array(
+                'ThumbnailPattern' => $transcode['thumbnail_subdir'] . $transcode['thumbnail_filename'] . 'thumb{count}',
                 'Key' => $transcode['conversion_filename'] . '.' . $transcode['extension'],
                 'Rotate' => 'auto',
                 'PresetId' => $transcode['transcode_preset'],
